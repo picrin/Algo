@@ -1,9 +1,11 @@
 \documentclass{article}
 
+\newcommand{\bigO}{\ensuremath{\mathcal{O}}}
+
 \title{Algorithmics 3 Assessed Exercise\\ \vspace{4mm} 
 Status and Implementation Reports}
 
-\author{\bf Insert your name\\ \bf and matriculation number here}
+\author{\bf Adam Kurkiewicz\\ \bf 1102499k}
 
 \date{\today}
 
@@ -12,21 +14,21 @@ Status and Implementation Reports}
 
 \section*{Status report}
 
-In the event of a non-working program, this section should state clearly what happens when the program is compiled (in the case of compile-time errors) or run (in the case of run-time errors).  
-
-Otherwise, this section should state whether you believe that your programs are working correctly. If so, indicate the basis for your belief, if not comment on what you think might be the problem.
+The implementation of both Dijkstra's and Backtrack search algorithms are correct. This has been tested against the results obtained by other students for certain inputs, which have been posted and discussed on official course's facebook group.
 
 \section*{Implementation report}
 
+To solve both problems I have used a classical adjacency list implementation. Every vertex is represented by an instance of Node.java class. Every object of this class carries information about its immediate children and its immediate parents. The instance of Graph.java carries information about every vertex belonging to the graph. That information can be accessed using the name of the vertex. The data structure used to implement this solution is a hash map. In order to instantiate the graph with properly connected nodes I use an interesting approach, which has got a worst-time complexity \bigO{(\left\vert{V}\right\vert + \left\vert{E}\right\vert\uppercase{2})}, where V is the set of vertices and E is the set of edges. The approach is again using a hashmap. For every word of length n and for every k <= n I create n hashmap keys with k\uppercase{th} character in the word replaced by a quotation mark character "?". Every key created in such manner maps onto a list which gets populated with all words differing by exactly one character. Because the number of edges depends on the maximum number of characters, which is constant, we can say that the complexity of graph creation is \bigO{(\left\vert{V}\right\vert)}. 
+
 \begin{itemize}
 \item[(a)] 
-Here, explain how you implemented the Dijkstra's algorithm to compute and return the required information. Include a discussion of any steps that you took to improve efficiency.
+the Dijkstra's algorithm implementation is absolutely standard with one modification. Instead of a fibonacci heap I used Java standard's library PriorityQueue.
 \item[(b)]
-Here, explain how you implemented the Backtrack search to compute and return the required information. Include a discussion of any steps that you took to improve efficiency.
+Backtrack search implementation is absolutely standard. I use a breadth first search, which starts from the vertex representing word1 and which terminates upon reaching the vertex representing word2 or once the list of descendants has been exhausted.
 \end{itemize}
 
 \section*{Empirical results}
 
-Summarise the running times of your two programs on the data sets provided. If the program fails to terminate in, say, two minutes, simply report non-termination. 
+The program terminates in about 500 ms for most types of the input. 
 
 \end{document}
